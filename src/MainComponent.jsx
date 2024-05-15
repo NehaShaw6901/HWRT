@@ -89,13 +89,12 @@ const DeleteButton = styled(FlexBox)`
 const MainComponent = () => {
   const [showSpinner, setShowSpinner] = useState(false);
   const [selectedFile, setSelectedFile] = useState();
-  const [showOutput,setShowOutput]=useState(false);
+  const [showOutput, setShowOutput] = useState(false);
 
   const deleteImage = () => {
     setSelectedFile();
     setShowSpinner(false);
-      setShowOutput(false);
-
+    setShowOutput(false);
   };
 
   const handleFile = async (file) => {
@@ -209,7 +208,7 @@ const MainComponent = () => {
           </FlexBox>
         )}
       </Wrapper>
-     {showOutput&& <MedicineDetails />}
+      {showOutput && <MedicineDetails />}
     </>
   );
 };

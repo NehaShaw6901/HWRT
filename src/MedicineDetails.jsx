@@ -1,13 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import FlexBox from "./common/FlexBox";
-import { Body1, H2,Body2 } from "./common/Headings";
+import { Body1, H2, Body2 } from "./common/Headings";
 import { boxShadowDs2 } from "./common/styles";
 import { device } from "./common/Responsive";
-import {
-  BRICK_TERRACOTA_900,
-  LINKEDIN_BG_COLOR,
-} from "./common/colors";
+import { BRICK_TERRACOTA_900, LINKEDIN_BG_COLOR } from "./common/colors";
 
 const medicineNames = [
   "Paracetamol",
@@ -26,7 +23,7 @@ const Wrapper = styled(FlexBox)`
   row-gap: 1rem;
   padding: 0 2rem;
   justify-content: center;
-  margin-bottom:1rem;
+  margin-bottom: 1rem;
 
   @media ${device.laptop} {
     flex-direction: row;
@@ -55,24 +52,22 @@ const FlexGap = styled(FlexBox)`
   flex-direction: column;
   row-gap: 0.5rem;
   align-items: flex-start;
-  
 
   @media ${device.laptop} {
     flex-direction: row;
     column-gap: 1rem;
-    align-items:center;
+    align-items: center;
   }
 `;
 
 const LinkContainer = styled(FlexBox)`
   width: 100%;
   align-items: flex-start;
-  flex-direction:column;
-  row-gap:0.5rem;
+  flex-direction: column;
+  row-gap: 0.5rem;
 `;
 
 export const MedicineDetails = () => {
-
   const handleLinkClick = (item) => {
     const encodedItem = encodeURIComponent(item);
     const googleSearchUrl = `https://www.google.com/search?q=${encodedItem} buying link netmeds`;
@@ -80,7 +75,6 @@ export const MedicineDetails = () => {
     const buyingLink = `your-buying-link-base-url/${item}`;
     window.open(buyingLink, "_blank");
   };
-
 
   return (
     <Wrapper>
@@ -104,7 +98,13 @@ export const MedicineDetails = () => {
         </H2>
         <LinkContainer>
           {medicineNames?.map((item) => (
-            <Body2 color={LINKEDIN_BG_COLOR} cursor="pointer" onClick={()=>handleLinkClick(item)}>{item} </Body2>
+            <Body2
+              color={LINKEDIN_BG_COLOR}
+              cursor="pointer"
+              onClick={() => handleLinkClick(item)}
+            >
+              {item}{" "}
+            </Body2>
           ))}
         </LinkContainer>
       </Section>

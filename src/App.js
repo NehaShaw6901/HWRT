@@ -12,18 +12,17 @@ const Wrapper = styled(FlexBox)`
   min-height: 80vh;
   flex-direction: column;
   align-items: center;
-  row-gap:2rem;
-  margin-top:8rem;
+  row-gap: 2rem;
+  margin-top: 8rem;
 `;
-
 
 function App() {
   return (
     <div className="App">
       <ShowToast />
-        <NavBar />
+      <NavBar />
       <Wrapper>
-        <Banner/>
+        <Banner />
         <MainComponent />
       </Wrapper>
     </div>

@@ -162,8 +162,8 @@ export const DARK_MOSS_GREEN_300 = "#C4D4B2";
 export const DARK_MOSS_GREEN_400 = "#AFC199";
 export const DARK_MOSS_GREEN_700 = "#728759";
 export const ForestGreen = "#228B22";
-export const CadmiumGreen=	"#097969";
-export const ShamrockGreen	="#009E60";
+export const CadmiumGreen = "#097969";
+export const ShamrockGreen = "#009E60";
 
 export const ERROR_RED_400 = "#E85A5C";
 export const ERROR_RED_500 = "#C73031";
