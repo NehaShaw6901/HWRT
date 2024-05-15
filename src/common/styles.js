@@ -9,3 +9,6 @@ export const boxShadowDs1 = css`
 export const boxShadowDs2 = css`
   box-shadow: 0px 0px 8px 4px rgb(0 0 0 / 8%);
 `;
+export const boxShadowDs3 = css`
+  box-shadow: 0px 0px 8px 4px rgb(0 0 0 / 8%);
+`;
