@@ -1,23 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import styled from "styled-components";
+import MainComponent from "./MainComponent";
+import ShowToast from "./common/ShowToast";
+import FlexBox from "./common/FlexBox";
+import NavBar from "./NavBar";
+import Banner from "./Banner";
+
+const Wrapper = styled(FlexBox)`
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 80vh;
+  flex-direction: column;
+  align-items: center;
+  row-gap:2rem;
+  margin-top:8rem;
+`;
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ShowToast />
+        <NavBar />
+      <Wrapper>
+        <Banner/>
+        <MainComponent />
+      </Wrapper>
     </div>
   );
 }
