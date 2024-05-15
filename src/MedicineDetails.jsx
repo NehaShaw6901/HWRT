@@ -70,7 +70,7 @@ const LinkContainer = styled(FlexBox)`
 export const MedicineDetails = () => {
   const handleLinkClick = (item) => {
     const encodedItem = encodeURIComponent(item);
-    const googleSearchUrl = `https://www.google.com/search?q=${encodedItem} buying link netmeds`;
+    const googleSearchUrl = `https://www.google.com/search?q=${encodedItem} buying link netmeds or 1mg`;
     window.open(googleSearchUrl, "_blank");
     const buyingLink = `your-buying-link-base-url/${item}`;
     window.open(buyingLink, "_blank");

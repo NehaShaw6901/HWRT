@@ -202,7 +202,7 @@ const MainComponent = () => {
                 <TfiClose color={BRIGHT_RED} />
               </DeleteButton>
             </FileDetails>
-            <Button primary onClick={handleFileSubmit}>
+            <Button primary disabled={showOutput} onClick={handleFileSubmit}>
               Submit
             </Button>
           </FlexBox>
