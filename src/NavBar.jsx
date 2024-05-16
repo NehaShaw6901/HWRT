@@ -22,7 +22,7 @@ const NavBar = () => {
     <Wrapper>
       <FaPrescriptionBottleMedical color={PLATINUM} />
       <Body1 bold color={WHITE}>
-        HWRT
+        HWTR
       </Body1>
     </Wrapper>
   );
