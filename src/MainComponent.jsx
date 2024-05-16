@@ -193,9 +193,7 @@ const MainComponent = () => {
                 </Preview>
                 <FlexBox column align="start">
                   <Body2 bold color={CadmiumGreen}>
-                    <a href={selectedFile[0]} target="_blank">
-                      My Image
-                    </a>
+                    My Image
                   </Body2>
                 </FlexBox>
               </FlexBox>

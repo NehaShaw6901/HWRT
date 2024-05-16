@@ -1,5 +1,4 @@
 import React from "react";
-import { FaPrescriptionBottleMedical } from "react-icons/fa6";
 import FlexBox from "./common/FlexBox";
 import styled from "styled-components";
 import { BUTTERSCOTCH_400, BRICK_TERRACOTA_900 } from "./common/colors";
