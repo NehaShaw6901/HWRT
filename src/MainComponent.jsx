@@ -10,6 +10,7 @@ import { Body1, Body2 } from "./common/Headings";
 import Spinner from "./common/Spinner";
 import { Button } from "./common/Buttons";
 import { MedicineDetails } from "./MedicineDetails";
+import axios from "axios";
 
 const Wrapper = styled(FlexBox)`
   width: 100%;
@@ -90,6 +91,9 @@ const MainComponent = () => {
   const [showSpinner, setShowSpinner] = useState(false);
   const [selectedFile, setSelectedFile] = useState();
   const [showOutput, setShowOutput] = useState(false);
+  const [medicineName, setMedicineName] = useState([]);
+  const [synonyms, setSynonyms] = useState([]);
+  const [genericName, setGenericName] = useState([]);
 
   const deleteImage = () => {
     setSelectedFile();
@@ -125,35 +129,48 @@ const MainComponent = () => {
   };
 
   //logic here for upload
-  const handleFileSubmit = () => {
+  const handleFileSubmit = async () => {
     if (!selectedFile) {
       toast.error("No file selected");
       return;
     }
-    const prescriptionFileName = "img1"; // Constant file name img1.jpg
+    // const prescriptionFileName = "img1"; // Constant file name img1.jpg
     const formData = new FormData();
-    formData.append(prescriptionFileName, selectedFile);
-    for (const pair of formData.entries()) {
-      console.log(pair[0], pair[1]);
-    }
+    formData.append("images", selectedFile);
 
-    // Send formData to your API
-    // Example API call:
-    // fetch('your-api-endpoint', {
-    //   method: 'POST',
-    //   body: formData
-    // })
-    // .then(response => response.json())
-    // .then(data => {
-    //   // Handle response
-    // })
-    // .catch(error => {
-    //   // Handle error
-    // });
-    //testing
+    console.log(formData.get("images"), "pritnign hte formdata aresponse");
+    const images = formData.get("images");
+    console.log(images?.name, "printing the image");
+    let imgUrl;
+    await axios
+      .post(
+        "http://localhost:8000/upload-image",
+        { image: images },
+        {
+          headers: {
+            "content-Type": "multipart/form-data",
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response.data.imageUrl);
+        imgUrl = response.data.imageUrl;
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+    await axios
+      .post("http://127.0.0.1:5000/upload", { image: imgUrl })
+      .then((response) => {
+        console.log(response);
+        setSynonyms(response?.data?.synonyms);
+        setMedicineName(response?.data?.drugName);
+        setGenericName(response?.data?.genericName)
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
 
-    // Reset selectedFile state after successful submission
-    // setSelectedFile(null);
     setShowSpinner(false);
     toast.success("File submitted successfully");
     setShowOutput(true);
@@ -193,9 +210,7 @@ const MainComponent = () => {
                 </Preview>
                 <FlexBox column align="start">
                   <Body2 bold color={CadmiumGreen}>
-                    <a href={selectedFile[0]} target="_blank">
-                      My Image
-                    </a>
+                    My Image
                   </Body2>
                 </FlexBox>
               </FlexBox>
@@ -209,7 +224,9 @@ const MainComponent = () => {
           </FlexBox>
         )}
       </Wrapper>
-      {showOutput && <MedicineDetails />}
+      {showOutput && (
+        <MedicineDetails synonyms={synonyms} medicineName={medicineName} genericName={genericName} />
+      )}
     </>
   );
 };

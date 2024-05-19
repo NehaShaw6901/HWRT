@@ -6,15 +6,7 @@ import { boxShadowDs2 } from "./common/styles";
 import { device } from "./common/Responsive";
 import { BRICK_TERRACOTA_900, LINKEDIN_BG_COLOR } from "./common/colors";
 
-const medicineNames = [
-  "Paracetamol",
-  "Mesacol OD",
-  "Pan40",
-  "Acloc rd",
-  "budamed 200",
-  "cetrazine",
-  "Atorvastatin",
-];
+
 
 const Wrapper = styled(FlexBox)`
   flex-direction: column;
@@ -67,7 +59,7 @@ const LinkContainer = styled(FlexBox)`
   row-gap: 0.5rem;
 `;
 
-export const MedicineDetails = () => {
+export const MedicineDetails = ({ synonyms, medicineName, genericName}) => {
   const handleLinkClick = (item) => {
     const encodedItem = encodeURIComponent(item);
     const googleSearchUrl = `https://www.google.com/search?q=${encodedItem} buying link netmeds or 1mg`;
@@ -75,7 +67,7 @@ export const MedicineDetails = () => {
     const buyingLink = `your-buying-link-base-url/${item}`;
     window.open(buyingLink, "_blank");
   };
-
+// const synonym = JSON.parse({synonyms.replace(/'/g, '"')});
   return (
     <Wrapper>
       <Section column>
@@ -83,13 +75,13 @@ export const MedicineDetails = () => {
           <H2 color={BRICK_TERRACOTA_900} bold>
             Medicine name:
           </H2>
-          <Body1 textTransform="capitalize">paracetamol</Body1>
+          <Body1 textTransform="capitalize">{medicineName}</Body1>
         </FlexGap>
         <FlexGap>
           <H2 color={BRICK_TERRACOTA_900} bold>
             Generic Name:{" "}
           </H2>
-          <Body1 textTransform="capitalize">paracetamol loreem</Body1>
+          <Body1 textTransform="capitalize">{genericName}</Body1>
         </FlexGap>
       </Section>
       <Section column>
@@ -97,7 +89,7 @@ export const MedicineDetails = () => {
           Buying Links
         </H2>
         <LinkContainer>
-          {medicineNames?.map((item) => (
+          {Object.keys(synonyms)?.map((item) => (
             <Body2
               color={LINKEDIN_BG_COLOR}
               cursor="pointer"
