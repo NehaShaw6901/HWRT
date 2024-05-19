@@ -10,6 +10,7 @@ import { Body1, Body2 } from "./common/Headings";
 import Spinner from "./common/Spinner";
 import { Button } from "./common/Buttons";
 import { MedicineDetails } from "./MedicineDetails";
+import axios from "axios";
 
 const Wrapper = styled(FlexBox)`
   width: 100%;
@@ -125,35 +126,45 @@ const MainComponent = () => {
   };
 
   //logic here for upload
-  const handleFileSubmit = () => {
+  const handleFileSubmit = async () => {
     if (!selectedFile) {
       toast.error("No file selected");
       return;
     }
-    const prescriptionFileName = "img1"; // Constant file name img1.jpg
+    // const prescriptionFileName = "img1"; // Constant file name img1.jpg
     const formData = new FormData();
-    formData.append(prescriptionFileName, selectedFile);
-    for (const pair of formData.entries()) {
-      console.log(pair[0], pair[1]);
-    }
+    formData.append("images", selectedFile);
 
-    // Send formData to your API
-    // Example API call:
-    // fetch('your-api-endpoint', {
-    //   method: 'POST',
-    //   body: formData
-    // })
-    // .then(response => response.json())
-    // .then(data => {
-    //   // Handle response
-    // })
-    // .catch(error => {
-    //   // Handle error
-    // });
-    //testing
+    console.log(formData.get("images"), "pritnign hte formdata aresponse");
+    const images = formData.get("images");
+    console.log(images?.name, "printing the image");
+    let imgUrl;
+    await axios
+      .post(
+        "http://localhost:8000/upload-image",
+        { image: images },
+        {
+          headers: {
+            "content-Type": "multipart/form-data",
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response.data.imageUrl);
+        imgUrl = response.data.imageUrl;
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+    await axios
+      .post("https://localhost:6000/upload-image", { image: imgUrl })
+      .then((response) => {
+        console.log(response.data.imageUrl);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
 
-    // Reset selectedFile state after successful submission
-    // setSelectedFile(null);
     setShowSpinner(false);
     toast.success("File submitted successfully");
     setShowOutput(true);
